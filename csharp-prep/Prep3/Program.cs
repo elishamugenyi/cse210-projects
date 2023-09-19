@@ -12,19 +12,17 @@ class Program
         string guess = Console.ReadLine();
         int guessed = int.Parse(guess);
 
-        if (guessed <5)
+        while (guessed <5)
         {
-            Console.WriteLine("You guessed is lower");
+            Console.WriteLine("Lower, Try again");
+            Console.ReadLine();
         }
-        else if(guessed > 5)
+        while (guessed > 5)
         {
-            Console.WriteLine("You guessed is higher");
+            Console.WriteLine("Higher, Try again");
+            Console.ReadLine();
         }
-        else 
-        {
-            Console.WriteLine("Correct, the Number is 5!");
-
-        }
+        Console.WriteLine("Correct, the Number is 5!");
 
     }
 }
