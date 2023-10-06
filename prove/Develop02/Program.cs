@@ -4,7 +4,6 @@ class Program
 {
     static Journal journal = new Journal();
     static Journal.PromptRandomizer journal1 = new Journal.PromptRandomizer(); 
-    //string prompt = journal.ChoosePrompt();
     static Random random = new Random();
 
     static void Main(string[] args)
