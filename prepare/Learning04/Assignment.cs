@@ -1,6 +1,6 @@
 using System;
 
-//create a base/parent/super class with attribrutes needed by other child classes.
+//create a base/parent/super class with attributes needed by other child classes.
 
 public class Assignment
 {
