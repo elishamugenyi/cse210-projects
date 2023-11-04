@@ -24,7 +24,7 @@ class Program
                 if (choice == 1)
                     {    
                         //start the breathing activity        
-                        Breathing breathing = new Breathing();
+                        Breathing breathing = new Breathing(3,3);
 
                     }
                     else if (choice == 2)
@@ -49,7 +49,7 @@ class Program
 
                         Console.WriteLine(prompt);
                         Console.WriteLine("Answer here:");// user types their answer here
-                        string response = Console.ReadLine();
+                        Console.ReadLine();
                         
                     }
                     else if (choice == 4)
