@@ -14,7 +14,7 @@
         <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <TextBlock Grid.Row="0" Text="Mindful App" Fontsize="20" HorizontalAlignment="Center"/>
+    <TextBlock Grid.Row="0" Text="Mindful App" FontSize="20" HorizontalAlignment="Center"/>
     <TextBlock Grid.Row="1" Text="1. Start the Breathing Exercise."/>
     <TextBlock Grid.Row="2" Text="2. Start the Reflection Exercise."/>
     <TextBlock Grid.Row="3" Text="3. Start the Listing Exercise."/>
