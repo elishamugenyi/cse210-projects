@@ -7,22 +7,22 @@
         mc:Ignorable="d"
         Title="Mindful App" Height="300" Width="400">
     <Grid>
-    <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-    <TextBlock Grid.Row="0" Text="Mindful App" FontSize="20" HorizontalAlignment="Center"/>
-    <TextBlock Grid.Row="1" Text="1. Start the Breathing Exercise."/>
-    <TextBlock Grid.Row="2" Text="2. Start the Reflection Exercise."/>
-    <TextBlock Grid.Row="3" Text="3. Start the Listing Exercise."/>
-    <TextBlock Grid.Row="4" Text="4. Exit."/>
+        <TextBlock Grid.Row="0" Text="Mindful App" FontSize="20" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Text="1. Start the Breathing Exercise."/>
+        <TextBlock Grid.Row="2" Text="2. Start the Reflection Exercise."/>
+        <TextBlock Grid.Row="3" Text="3. Start the Listing Exercise."/>
+        <TextBlock Grid.Row="3" Text="4. Exit." Margin="0,15,0,-15"/>
 
-    <TextBox x:Name="userInput" Grid.Row="5" Width="100" HorizontalAlignment="Center" Margin="0 10"/>
+        <TextBox x:Name="userInput" Grid.Row="3" Width="100" HorizontalAlignment="Left" Margin="138,37,0,-18"/>
 
-    <Button Grid.Row="8" Content="Enter" Width="75" HorizontalAlignment="Center" Click="EnterButton_Click" RenderTransformOrigin="0.478,3.46"/>
+        <Button Grid.Row="3" Content="Enter" Width="76" HorizontalAlignment="Center" Click="EnterButton_Click" RenderTransformOrigin="0.478,3.46" Margin="0,83,0,-86"/>
 
     </Grid>
 </Window>
