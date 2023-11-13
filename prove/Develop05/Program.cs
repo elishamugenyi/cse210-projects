@@ -1,4 +1,8 @@
 using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+
 
 // User Class
 public class User
@@ -19,16 +23,63 @@ public class User
         TotalScore += goal.Value;
     }
 
-    public void SaveGoals()
+    public void SaveGoals(string filePath)
     {
-        // Save goals implementation
-        Console.WriteLine("Goals saved successfully!");
+        // Save goals implementation and save them to a csv file
+        var csvContent = new StringBuilder();
+        foreach (var goal in Goals)
+        {
+            var goalLine = $"{goal.Title},{goal.Value},{goal.IsCompleted},{(goal is ChecklistGoal ? ((ChecklistGoal)goal).AccomplishedCount : 0)},{(goal is ChecklistGoal ? ((ChecklistGoal)goal).RequiredCount : 0)}";
+            csvContent.AppendLine(goalLine);
+        }
+
+        File.WriteAllText(filePath, csvContent.ToString());
+        Console.WriteLine($"Goals saved to {filePath} successfully!");
+
+       // Console.WriteLine("Goals saved successfully!");
     }
 
-    public void LoadGoals()
+    public void LoadGoals(string filePath)
     {
-        // Load goals implementation
-        Console.WriteLine("Goals loaded successfully!");
+        // Load goals implementation and load them to a csv file
+        try
+        {
+            var lines = File.ReadAllLines(filePath);
+            Goals.Clear();
+
+            foreach (var line in lines.Skip(1)) // Skip header line
+            {
+                var values = line.Split(',');
+                var title = values[0];
+                var goalValue = int.Parse(values[1]);
+                var isCompleted = bool.Parse(values[2]);
+
+                Goal goal;
+                if (values.Length == 3)
+                {
+                    goal = new SimpleGoal { Title = title, Value = goalValue, IsCompleted = isCompleted };
+                }
+                else if (values.Length == 5)
+                {
+                    var accomplishedCount = int.Parse(values[3]);
+                    var requiredCount = int.Parse(values[4]);
+                    goal = new ChecklistGoal { Title = title, Value = goalValue, IsCompleted = isCompleted, AccomplishedCount = accomplishedCount, RequiredCount = requiredCount };
+                }
+                else
+                {
+                    goal = new Goal { Title = title, Value = goalValue, IsCompleted = isCompleted };
+                }
+
+                Goals.Add(goal);
+            }
+
+            Console.WriteLine($"Goals loaded from {filePath} successfully!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading goals: {ex.Message}");
+        }
+        //Console.WriteLine("Goals loaded successfully!");
     }
 }
 
@@ -38,7 +89,7 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Welcome to the Eternal Quest Game!");
-        // Example usage
+        // create instance for user to start capturing goals.
         User user = new User();
         user.Goals = new List<Goal>();
 
@@ -65,10 +116,14 @@ class Program
                     ListGoals(user);
                     break;
                 case 3:
-                    user.SaveGoals();
+                    Console.Write("Enter the file path to save goals (e.g., goals.csv): ");
+                    string saveFilePath = Console.ReadLine();
+                    user.SaveGoals(saveFilePath);
                     break;
                 case 4:
-                    user.LoadGoals();
+                    Console.Write("Enter the file path to load goals from (e.g., goals.csv): ");
+                    string loadFilePath = Console.ReadLine();
+                    user.LoadGoals(loadFilePath);
                     break;
                 case 5:
                     RecordEvent(user);
