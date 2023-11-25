@@ -28,6 +28,7 @@ public class Student
         _password =Console.ReadLine();
 
         //create excel package
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         using (var package = new ExcelPackage())
         {
             //add a worksheet to the excel package
