@@ -10,6 +10,9 @@ class Program
         Login login = new Login();
         Student student = login.LoginStudent();
 
+        //pay tuition
+        PayUniversity paytuition = new PayUniversity();
+
         //DISPLAY MENU
         bool exit = false;
         while(!exit)
@@ -35,7 +38,9 @@ class Program
 
                         //set students balance to zero
                         student.SetAccountBalance(0.00);
-                        Console.WriteLine($"Your account balance is:  {student.AccountBalance:2f}");            
+                        Console.WriteLine($"Your account balance is:  {student.AccountBalance:2f}");
+                        Console.WriteLine("");
+                        paytuition.Pay(student);            
                     }
                     else
                     {
