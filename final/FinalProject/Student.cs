@@ -12,6 +12,31 @@ public class Student
     //create the attributes for this class.
     private int _studentID;
     private string _name, _email, _password;
+    private double _accountbalance;
+
+    //set properties for accessing attributes
+    public int StudentID{ get=> _studentID;}
+    public string Name{ get=> _name;}
+    public string Email{ get=> _email;}
+    public string Password{ get=> _password;}
+    public double AccountBalance{ get=> _accountbalance;}
+
+    //create a constructor using the properties set
+    public Student(int studentID, string name, string email, string password)
+    {
+        _studentID = studentID;
+        _name = name;
+        _email = email;
+        _password = password;
+        _accountbalance = 0;
+    }
+
+    //set account balance method
+    public void SetAccountBalance(double balance)
+    {
+        _accountbalance = balance;
+    }
+
 
     public void SignUp()
     {
@@ -28,7 +53,7 @@ public class Student
         _password =Console.ReadLine();
 
         //create excel package
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+        //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;//mentioning EPPlus is non commercial for this project
         using (var package = new ExcelPackage())
         {
             //add a worksheet to the excel package
