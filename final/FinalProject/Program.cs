@@ -8,7 +8,8 @@ class Program
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         //perform student login
         Login login = new Login();
-        Student student = login.LoginStudent();
+        Student student = new Student(0,"","","");
+        
 
         //pay tuition
         PayUniversity paytuition = new PayUniversity();
@@ -34,6 +35,7 @@ class Program
                 {
                    if (student !=null)
                     {
+                        login.LoginStudent();
                         Console.WriteLine($"Login successful. Welcome, {student.Name}");
 
                         //set students balance to zero
