@@ -1,4 +1,5 @@
 using OfficeOpenXml;
+using OfficeOpenXml.Filter;
 using System;
 using System.Data.Common;
 using System.IO;
@@ -19,7 +20,7 @@ public class Student
     public string Name{ get=> _name;}
     public string Email{ get=> _email;}
     public string Password{ get=> _password;}
-    public double AccountBalance{ get=> _accountbalance;}
+    public double AccountBalance{ get=> _accountbalance; set=> _accountbalance = value;}
 
     //create a constructor using the properties set
     public Student(int studentID, string name, string email, string password)
@@ -52,6 +53,7 @@ public class Student
         Console.WriteLine("Enter Password:");
         _password =Console.ReadLine();
 
+
         //create excel package
         //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;//mentioning EPPlus is non commercial for this project
         using (var package = new ExcelPackage())
@@ -64,12 +66,14 @@ public class Student
             worksheet.Cells["B1"].Value = "Name";
             worksheet.Cells["C1"].Value = "Email";
             worksheet.Cells["D1"].Value = "Password";
+            
 
             //add user date to worksheet
             worksheet.Cells["A2"].Value = _studentID;
             worksheet.Cells["B2"].Value = _name;
             worksheet.Cells["C2"].Value = _email;
             worksheet.Cells["D2"].Value = _password;
+          
 
             //save the excel package to a file
             var file = new FileInfo("StudentData.xlsx");
