@@ -1,4 +1,4 @@
-//this child class pays student tuition.
+//this does not inherit from student but use student as an object because paying is an activity and not some type of student.
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
