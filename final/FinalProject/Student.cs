@@ -32,6 +32,11 @@ public class Student
         _accountbalance = 0;
     }
 
+    //create a getstudentid method to use in other classes
+    public int GetStudentId()
+    {
+        return _studentID;
+    }
     //set account balance method
     public void SetAccountBalance(double balance)
     {
