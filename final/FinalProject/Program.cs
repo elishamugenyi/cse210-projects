@@ -8,11 +8,12 @@ class Program
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         //perform student login
         Login login = new Login();
-        Student student = new Student(0,"","","");
+        
         
 
         //pay tuition
         PayUniversity paytuition = new PayUniversity();
+        Student student = null;
 
         //DISPLAY MENU
         bool exit = false;
@@ -29,6 +30,7 @@ class Program
             {
                 if (choice ==1)
                 {
+                    Student student = new Student(0,"","","");
                     student.SignUp();
                 }
                 else if (choice ==2)
