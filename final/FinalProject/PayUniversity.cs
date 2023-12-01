@@ -22,15 +22,17 @@ public class PayUniversity
 
         if (student.AccountBalance == 0)
         {
+            TopUp top = new TopUp();
+            top.TopUp(student)
             Console.WriteLine("Enter Tuition Amount to Pay:");
             _tuitionamount = double.Parse(Console.ReadLine());
-            student.AccountBalance += _tuitionamount;
+            student.AccountBalance -= _tuitionamount;
 
             Console.WriteLine("");
-            Console.WriteLine($"Your new Account Balance is: {student.AccountBalance}");
-            Console.WriteLine("Paying Tuition......");
-            student.AccountBalance -= _tuitionamount;
-            Console.WriteLine("Paid successfully!");
+            //Console.WriteLine($"Your new Account Balance is: {student.AccountBalance}");
+            Console.WriteLine("Paid successfully");
+            //student.AccountBalance -= _tuitionamount;
+            //Console.WriteLine("Paid successfully!");
             
         }
         else
