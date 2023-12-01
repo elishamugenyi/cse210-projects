@@ -30,7 +30,8 @@ class Program
             {
                 if (choice ==1)
                 {
-                    Student student = new Student(0,"","","");
+                    //create new student instance when signing up
+                    student = new Student(0,"","","");
                     student.SignUp();
                 }
                 else if (choice ==2)
