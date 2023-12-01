@@ -8,7 +8,7 @@ class Program
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         //perform student login
         Login login = new Login();
-        Student student = new Student(0,"","","");
+        Student student = new Student(0,"","","");//create student instance
         
         
 
@@ -31,8 +31,6 @@ class Program
             {
                 if (choice ==1)
                 {
-                    //create new student instance when signing up
-                    //student = new Student(0,"","","");
                     student.SignUp();
                 }
                 else if (choice ==2)
@@ -40,11 +38,11 @@ class Program
                    if (student !=null)
                     {
                         login.LoginStudent();
-                        Console.WriteLine($"Login successful. Welcome, {student.Name}");
+                        Console.WriteLine($"Login successful.");
 
                         //set students balance to zero
                         student.SetAccountBalance(0.00);
-                        Console.WriteLine($"Your account balance is:  {student.AccountBalance:2f}");
+                        
                         Console.WriteLine("");
                         paytuition.Pay(student);            
                     }
@@ -53,9 +51,8 @@ class Program
                         Console.WriteLine("Login unsuccessfull, Invalid ID or Password");
                         student.SignUp();
                     }
-                    //Student student1 = new Student(20234567,  "eli", "email@testing.com", "password123");
-                    //student.SignUp();
-                    Console.WriteLine("Hello FinalProject World!...The End"); 
+                    
+                    Console.WriteLine("Thank you for using StudentPay"); 
                 }
                 else if (choice ==3)
                 {
