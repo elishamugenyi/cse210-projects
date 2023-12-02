@@ -1,11 +1,11 @@
 using OfficeOpenXml;
 using OfficeOpenXml.Filter;
 using System;
-using System.Data.Common;
+//using System.Data.Common;
 using System.IO;
-using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
+//using System.Linq;
+//using System.Runtime.Intrinsics.X86;
+using System.Text.RegularExpressions;
 
 //this is the base class and starting class in this final project.
 public class Student
@@ -27,7 +27,7 @@ public class Student
     {
         _studentID = studentID;
         _name = name;
-        _email = email;
+        _email = IsValidEmail(email) ? email : throw new ArgumentException("Invalid email format");
         _password = password;
         _accountbalance = 0;
     }
@@ -53,7 +53,17 @@ public class Student
         _name = Console.ReadLine();
 
         Console.WriteLine("Enter Email:");
-        _email =Console.ReadLine();
+        string inputEmail =Console.ReadLine();
+        //check email validation
+        if(IsValidEmail(inputEmail))
+        {
+            _email = inputEmail;
+        }
+        else
+        {
+            Console.WriteLine("Invalid Email format. Registration failed");
+            return;
+        }
 
         Console.WriteLine("Enter Password:");
         _password =Console.ReadLine();
@@ -87,6 +97,12 @@ public class Student
         }
 
         Console.WriteLine("Registered successfully");
+    }
+    private bool IsValidEmail(string email)
+    {
+        // Use a regular expression for basic email validation
+        string pattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+        return Regex.IsMatch(email, pattern);
     }
 
 
