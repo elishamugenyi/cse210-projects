@@ -27,7 +27,7 @@ public class Student
     {
         _studentID = studentID;
         _name = name;
-        _email = IsValidEmail(email) ? email : throw new ArgumentException("Invalid email format");
+        _email = email;/*IsValidEmail(email) ? email : throw new ArgumentException("Invalid email format");*/
         _password = password;
         _accountbalance = 0;
     }
@@ -53,9 +53,9 @@ public class Student
         _name = Console.ReadLine();
 
         Console.WriteLine("Enter Email:");
-        string inputEmail =Console.ReadLine();
+        _email =Console.ReadLine();
         //check email validation
-        if(IsValidEmail(inputEmail))
+        /*if(IsValidEmail(inputEmail))
         {
             _email = inputEmail;
         }
@@ -64,46 +64,58 @@ public class Student
             Console.WriteLine("Invalid Email format. Registration failed");
             return;
         }
-
+        */
         Console.WriteLine("Enter Password:");
         _password =Console.ReadLine();
 
 
-        //create excel package
+        //load eixisting file and it is not present, create excel package
         //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;//mentioning EPPlus is non commercial for this project
-        using (var package = new ExcelPackage())
+        FileInfo file = new FileInfo("StudentData.xlsx");
+        using (var package = new ExcelPackage(file))
         {
+            //get first worksheet assuming it exist.
+            var worksheet = package.Workbook.Worksheets.FirstOrDefault();
             //add a worksheet to the excel package
-            var worksheet = package.Workbook.Worksheets.Add("StudentData");
+            //var worksheet = package.Workbook.Worksheets.Add("StudentData");
 
-            //set column headers
-            worksheet.Cells["A1"].Value = "Student ID";
-            worksheet.Cells["B1"].Value = "Name";
-            worksheet.Cells["C1"].Value = "Email";
-            worksheet.Cells["D1"].Value = "Password";
-            
-
+            //if worksheet doesn't exist, create it
+            if (worksheet == null)
+            {
+                worksheet = package.Workbook.Worksheets.Add("StudentData");
+                //set column headers
+                worksheet.Cells["A1"].Value = "Student ID";
+                worksheet.Cells["B1"].Value = "Name";
+                worksheet.Cells["C1"].Value = "Email";
+                worksheet.Cells["D1"].Value = "Password";
+            }
+            //find the first empty row
+            int row = 2;
+            while (worksheet.Cells[row, 1].Value != null)
+            {
+                row++;
+            }          
             //add user date to worksheet
-            worksheet.Cells["A2"].Value = _studentID;
-            worksheet.Cells["B2"].Value = _name;
-            worksheet.Cells["C2"].Value = _email;
-            worksheet.Cells["D2"].Value = _password;
+            worksheet.Cells[row, 1].Value = _studentID;
+            worksheet.Cells[row, 2].Value = _name;
+            worksheet.Cells[row, 3].Value = _email;
+            worksheet.Cells[row, 4].Value = _password;
           
 
             //save the excel package to a file
-            var file = new FileInfo("StudentData.xlsx");
-            package.SaveAs(file);
+            //var file = new FileInfo("StudentData.xlsx");
+            package.Save();
 
         }
 
         Console.WriteLine("Registered successfully");
     }
-    private bool IsValidEmail(string email)
+    /*private bool IsValidEmail(string email)
     {
         // Use a regular expression for basic email validation
-        string pattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+        string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
         return Regex.IsMatch(email, pattern);
     }
-
+*/
 
 }
