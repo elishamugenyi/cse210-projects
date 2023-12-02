@@ -22,6 +22,7 @@ public class PayUniversity
 
     public void Pay(Student student)
     {
+        int studentId = student.GetStudentId();//get student ID so it can be appended to the list.
         Console.WriteLine("Enter Semester to Pay:");
         _semester = Console.ReadLine();
 
@@ -41,21 +42,37 @@ public class PayUniversity
         
             //create a file that stores student credit & semester payment transactions for remitances in the future
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (var package = new ExcelPackage())
+            FileInfo file = new FileInfo("StudentTransactions.xlsx");
+            using (var package = new ExcelPackage(file))
             {
                 //add worksheet to store these details to the excel package
-                var worksheet = package.Workbook.Worksheets.Add("StudentTransactions");
+                //var worksheet = package.Workbook.Worksheets.Add("StudentTransactions");
 
-                //set column headers
-                worksheet.Cells["E1"].Value = "Semester";
-                worksheet.Cells["F1"].Value = "Tuition Paid";
+                //get first worksheet assuming it exist
+                var worksheet = package.Workbook.Worksheets.FirstOrDefault();
 
+                //if it doesn't exist, create it
+                if (worksheet == null)
+                {
+                    worksheet = package.Workbook.Worksheets.Add("StudentTransactions");
+                    //set column headers
+                    worksheet.Cells["A1"].Value = "Student ID";
+                    worksheet.Cells["B1"].Value = "Semester";
+                    worksheet.Cells["C1"].Value = "Tuition Paid";
+                }
+                //find the first empty row
+                int row = 2;
+                while (worksheet.Cells[row, 1].Value != null)
+                {
+                    row++;
+                }                       
                 //add values to the excel sheet
-                worksheet.Cells["E2"].Value = _semester;
-                worksheet.Cells["F2"].Value = _tuitionamount;
+                worksheet.Cells[row, 1].Value = studentId;
+                worksheet.Cells[row, 2].Value = _semester;
+                worksheet.Cells[row, 3].Value = _tuitionamount;
                 //save the file
-                var file = new FileInfo("StudentTransactions.xlsx");
-                package.SaveAs(file);
+                //var file = new FileInfo("StudentTransactions.xlsx");
+                package.Save();
             }
             Console.WriteLine("Transactions saved.");
             
