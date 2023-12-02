@@ -16,7 +16,7 @@ public class Login : Student
         int studentID = int.Parse(Console.ReadLine());
 
         Console.WriteLine("Enter Password:");
-        string password = Console.ReadLine();
+        string password = ReadPassword();
         //read student from excel file
         var students = ReadStudentsFromExcel();
         //find the student with given ID and password
@@ -47,5 +47,30 @@ public class Login : Student
             }
         }
         return students;
+    }
+    private static string ReadPassword()
+    {
+        string password = "";
+        ConsoleKeyInfo key;
+
+        do
+        {
+            key = Console.ReadKey(true);
+
+            // Ignore any key that is not a backspace or enter
+            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+            {
+                password += key.KeyChar;
+                Console.Write("*");
+            }
+            else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+            {
+                password = password.Substring(0, (password.Length - 1));
+                Console.Write("\b \b");
+            }
+        } while (key.Key != ConsoleKey.Enter);
+
+        Console.WriteLine(); // Move to the next line after password entry
+        return password;
     }
 }
