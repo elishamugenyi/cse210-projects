@@ -35,27 +35,37 @@ public class TopUp
             Console.WriteLine($"{student.GetStudentId()} Your new Account balance is {student.AccountBalance}");
              //create a file that stores student credit & semester payment transactions for remitances in the future
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (var package = new ExcelPackage())
+            FileInfo file = new FileInfo("StudentCredit.xlsx");//check if file already exist
+            using (var package = new ExcelPackage(file))
             {
-                //add worksheet to store these details to the excel package
-                var worksheet = package.Workbook.Worksheets.Add("StudentCredit");
+                //get worksheet assuming it exists.
+                var worksheet = package.Workbook.Worksheets.FirstOrDefault();
 
-                //set column headers
-                worksheet.Cells["A1"].Value = "StudentID";
-                worksheet.Cells["B1"].Value = "Amount";
-                worksheet.Cells["C1"].Value = "Bank Name";
-                worksheet.Cells["D1"].Value = "Bank Account";
-                
-
+                //if the worksheet doesn't exist, create it.
+                if (worksheet == null)
+                {
+                    worksheet = package.Workbook.Worksheets.Add("StudentCredit");
+                    //set column headers
+                    worksheet.Cells["A1"].Value = "StudentID";
+                    worksheet.Cells["B1"].Value = "Amount";
+                    worksheet.Cells["C1"].Value = "Bank Name";
+                    worksheet.Cells["D1"].Value = "Bank Account";
+                }
+                //find the first empty row
+                int row = 2;
+                while (worksheet.Cells[row, 1].Value != null)
+                {
+                    row++;
+                }
                 //add values to the excel sheet
-                worksheet.Cells["A2"].Value = studentID;
-                worksheet.Cells["B2"].Value = _amount;
-                worksheet.Cells["C2"].Value = _bankname;
-                worksheet.Cells["D2"].Value = _bankaccount;
+                worksheet.Cells[row, 1].Value = studentID;
+                worksheet.Cells[row, 2].Value = _amount;
+                worksheet.Cells[row, 3].Value = _bankname;
+                worksheet.Cells[row, 4].Value = _bankaccount;
                 
                 //save the file
-                var file = new FileInfo("StudentCredit.xlsx");
-                package.SaveAs(file);
+                //var file = new FileInfo("StudentCredit.xlsx");
+                package.Save();
             }
             Console.WriteLine("Data saved.");
             
