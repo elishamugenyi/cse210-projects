@@ -25,7 +25,7 @@ class Program
             Console.WriteLine("1.Sign up.");
             Console.WriteLine("2.Login.");
             Console.WriteLine("3.Create Virtual Card.");
-            Console.WriteLine("4.Exit.")
+            Console.WriteLine("4.Exit.");
             Console.WriteLine("Select an option 1-4");
 
             int choice;
@@ -59,8 +59,8 @@ class Program
                 else if (choice ==3)
                 {
                     //create Virtual card
-                    VirtualCard virtualcard = new VirtualCard()
-                    
+                    VirtualCard virtualcard = new VirtualCard();
+
                 }
                 else if (choice == 4)
                 {
