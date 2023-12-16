@@ -5,6 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         //perform student login
         Login login = new Login();
@@ -23,8 +24,9 @@ class Program
             Console.WriteLine("Select a choice to start.");
             Console.WriteLine("1.Sign up.");
             Console.WriteLine("2.Login.");
-            Console.WriteLine("3.Exit");
-            Console.WriteLine("Select an option 1-3");
+            Console.WriteLine("3.Create Virtual Card.");
+            Console.WriteLine("4.Exit.")
+            Console.WriteLine("Select an option 1-4");
 
             int choice;
             if(int.TryParse(Console.ReadLine(), out choice))
@@ -55,6 +57,12 @@ class Program
                     Console.WriteLine("Thank you for using StudentPay"); 
                 }
                 else if (choice ==3)
+                {
+                    //create Virtual card
+                    VirtualCard virtualcard = new VirtualCard()
+                    
+                }
+                else if (choice == 4)
                 {
                     //exit menu
                     break;
