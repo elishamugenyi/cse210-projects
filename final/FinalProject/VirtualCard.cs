@@ -2,7 +2,7 @@ using System;
  //create class to create a virtual card
  public class VirtualCard
  {
-    private double _cardnumber;
+    private int _cardnumber;
     private int _ccvnumber;
     private string _cardholder;
     private DateTime _expire;
@@ -33,17 +33,17 @@ using System;
     }
 
     //method to generate random numbers.
-    private double GenerateCardNumber()
+    private int GenerateCardNumber()
     {
         Random rand = new Random();
-        double _cardnumber = rand.Next(100000000000, 999999999999);
-        return _cardnumber;
+        int cardnumber = rand.Next(10000000, 99999999);
+        return cardnumber;
     }
 
     private int GenerateCcvNumber()
     {
         Random rand = new Random();
-        int _ccvnumber = rand.Next(100, 999);
-        return _ccvnumber;
+        int ccvnumber = rand.Next(100, 999);
+        return ccvnumber;
     }
  }
