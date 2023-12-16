@@ -1,8 +1,8 @@
 using System;
  //create class to create a virtual card
- public class VirtualCard()
+ public class VirtualCard
  {
-    private long _cardnumber;
+    private double _cardnumber;
     private int _ccvnumber;
     private string _cardholder;
     private DateTime _expire;
@@ -21,7 +21,7 @@ using System;
 
         //create card number
         _cardnumber = GenerateCardNumber();
-        Console.WriteLine($"Card number: {_cardnumber}")
+        Console.WriteLine($"Card number: {_cardnumber}");
 
         //create ccv number
         _ccvnumber = GenerateCcvNumber();
@@ -33,17 +33,17 @@ using System;
     }
 
     //method to generate random numbers.
-    private long GenerateCardNumber()
+    private double GenerateCardNumber()
     {
         Random rand = new Random();
-        long _cardnumber = rand.Next(100000000000, 999999999999);
+        double _cardnumber = rand.Next(100000000000, 999999999999);
         return _cardnumber;
     }
 
     private int GenerateCcvNumber()
     {
         Random rand = new Random();
-        int _ccvnumber = rand.Next(100, 999)
+        int _ccvnumber = rand.Next(100, 999);
         return _ccvnumber;
     }
  }
