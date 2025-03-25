@@ -43,7 +43,7 @@ class Program
                         Console.WriteLine($"Login successful.");
 
                         //set students balance to zero
-                        student.SetAccountBalance(0.00);
+                        //student.SetAccountBalance(0.00);
                         
                         Console.WriteLine("");
                         paytuition.Pay(student);            
